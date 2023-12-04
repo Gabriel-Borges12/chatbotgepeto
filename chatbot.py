@@ -1,21 +1,21 @@
 import tkinter as tk
 import openai
 
-chave_api = ""
+chave_api = "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"
 
 openai.api_key = chave_api
 
-def enviar_mensagem(enviar_mensagem, lista_mensagens = []):
+def enviar_mensagem(mensagem, lista_mensagens=[]):
     lista_mensagens.append(
         {"role": "user", "content": mensagem}
-        )
-
-    resposta =  openai.ChatCompletion.create(
-        model = "gpt-3.5-turbo",
-        messages = lista_mensagens,
     )
 
-    return resposta["choices"][0][mesnagem]
+    resposta = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=lista_mensagens,
+    )
+
+    return resposta["choices"][0]["message"]["content"]
 
 lista_mensagens = []
 while True:
@@ -25,5 +25,5 @@ while True:
         break
     else:
         resposta = enviar_mensagem(texto, lista_mensagens)
-        lista_mensagens.append(resposta)
-        print("Chatbot: ", resposta["content"])
+        lista_mensagens.append({"role": "assistant", "content": resposta})
+        print("Chatbot: ", resposta)
