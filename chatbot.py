@@ -1,7 +1,7 @@
 import tkinter as tk
 import openai
 
-chave_api = "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"
+chave_api = "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"
 
 openai.api_key = chave_api
 
